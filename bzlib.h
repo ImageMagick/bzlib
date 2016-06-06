@@ -70,24 +70,27 @@ typedef
 #include <stdio.h>
 #endif
 
-#ifdef _WIN32
-#   include <windows.h>
-#   ifdef small
-      /* windows.h define small to char */
-#      undef small
-#   endif
-#   if defined(BZ_EXPORT) && defined(_DLL)
-#   define BZ_API(func) WINAPI func
-#   if !defined(_LIB)
-#   define BZ_EXTERN extern _declspec(dllexport)
+#if defined(_WIN32)
+# include <windows.h>
+# ifdef small
+    /* windows.h define small to char */
+#    undef small
+# endif
+# if defined(_DLL) && !defined(_LIB)
+#   if !defined(BZ_EXPORT)
+#     pragma message( "BZIP compiling as DLL import" ) 
+#     define BZ_API(func) func
+#     define BZ_EXTERN __declspec(dllimport)
 #   else
+#     pragma message( "BZIP compiling as DLL export" ) 
+#     define BZ_API(func) func
+#     define BZ_EXTERN extern __declspec(dllexport)
+#   endif
+# else
+#   pragma message( "BZIP compiling as library" ) 
+#   define BZ_API(func) func
 #   define BZ_EXTERN extern
-#   endif
-#   else
-   /* import windows dll dynamically */
-#   define BZ_API(func) (WINAPI * func)
-#   define BZ_EXTERN
-#   endif
+# endif
 #else
 #   define BZ_API(func) func
 #   define BZ_EXTERN extern
