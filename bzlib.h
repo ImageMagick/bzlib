@@ -78,16 +78,13 @@ typedef
 # endif
 # if defined(_DLL) && !defined(_LIB)
 #   if !defined(BZ_EXPORT)
-#     pragma message( "BZIP compiling as DLL import" ) 
 #     define BZ_API(func) func
 #     define BZ_EXTERN __declspec(dllimport)
 #   else
-#     pragma message( "BZIP compiling as DLL export" ) 
 #     define BZ_API(func) func
 #     define BZ_EXTERN extern __declspec(dllexport)
 #   endif
 # else
-#   pragma message( "BZIP compiling as library" ) 
 #   define BZ_API(func) func
 #   define BZ_EXTERN extern
 # endif
