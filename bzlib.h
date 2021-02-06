@@ -65,30 +65,29 @@ typedef
    } 
    bz_stream;
 
-
-#ifndef BZ_IMPORT
-#define BZ_EXPORT
-#endif
-
 #ifndef BZ_NO_STDIO
 /* Need a definitition for FILE */
 #include <stdio.h>
 #endif
 
-#ifdef _WIN32
-#   include <windows.h>
-#   ifdef small
-      /* windows.h define small to char */
-#      undef small
+#if defined(_WIN32)
+#  include <windows.h>
+#  ifdef small
+     /* windows.h define small to char */
+#    undef small
 #   endif
-#   ifdef BZ_EXPORT
-#   define BZ_API(func) WINAPI func
-#   define BZ_EXTERN extern
-#   else
-   /* import windows dll dynamically */
-#   define BZ_API(func) (WINAPI * func)
-#   define BZ_EXTERN
-#   endif
+#  if defined(_DLL) && !defined(_LIB)
+#    if !defined(BZ_EXPORT)
+#      define BZ_API(func) func
+#      define BZ_EXTERN __declspec(dllimport)
+#    else
+#      define BZ_API(func) func
+#      define BZ_EXTERN extern __declspec(dllexport)
+#    endif
+#  else
+#    define BZ_API(func) func
+#    define BZ_EXTERN extern
+#  endif
 #else
 #   define BZ_API(func) func
 #   define BZ_EXTERN extern
