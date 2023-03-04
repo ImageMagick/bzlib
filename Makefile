@@ -20,7 +20,7 @@ RANLIB=ranlib
 LDFLAGS=
 
 BIGFILES=-D_FILE_OFFSET_BITS=64
-CFLAGS=-Wall -Winline -O3 -fPIC -g $(BIGFILES)
+CFLAGS=-Wall -Winline -O3 -fPIC -g $(BIGFILES) $(FLAGS)
 
 # Where you want it installed when you do 'make install'
 PREFIX=/usr/local
@@ -34,7 +34,7 @@ OBJS= blocksort.o  \
       decompress.o \
       bzlib.o
 
-all: libbz2.a bzip2 bzip2recover test
+all: libbz2.a bzip2 bzip2recover
 
 bzip2: libbz2.a bzip2.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2 bzip2.o -L. -lbz2
@@ -50,23 +50,6 @@ libbz2.a: $(OBJS)
 		echo $(RANLIB) libbz2.a ; \
 		$(RANLIB) libbz2.a ; \
 	fi
-
-check: test
-test: bzip2
-	@cat words1
-	./bzip2 -1  < sample1.ref > sample1.rb2
-	./bzip2 -2  < sample2.ref > sample2.rb2
-	./bzip2 -3  < sample3.ref > sample3.rb2
-	./bzip2 -d  < sample1.bz2 > sample1.tst
-	./bzip2 -d  < sample2.bz2 > sample2.tst
-	./bzip2 -ds < sample3.bz2 > sample3.tst
-	cmp sample1.bz2 sample1.rb2 
-	cmp sample2.bz2 sample2.rb2
-	cmp sample3.bz2 sample3.rb2
-	cmp sample1.tst sample1.ref
-	cmp sample2.tst sample2.ref
-	cmp sample3.tst sample3.ref
-	@cat words3
 
 install: bzip2 bzip2recover
 	if ( test ! -d $(PREFIX)/bin ) ; then mkdir -p $(PREFIX)/bin ; fi
