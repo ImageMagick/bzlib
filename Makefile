@@ -20,7 +20,7 @@ RANLIB=ranlib
 LDFLAGS=
 
 BIGFILES=-D_FILE_OFFSET_BITS=64
-CFLAGS=-Wall -Winline -O3 -fPIC -g $(BIGFILES) $(FLAGS)
+CFLAGS=-Wall -Winline $(BIGFILES) $(FLAGS)
 
 # Where you want it installed when you do 'make install'
 PREFIX=/usr/local
