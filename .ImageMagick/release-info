@@ -1,2 +1,2 @@
 https://www.sourceware.org/bzip2/downloads.html
-bzip2 ([0-9]+\.[0-9]+\.[0-9]+)\.
+bzip2 \K([0-9]+\.[0-9]+\.[0-9]+)
