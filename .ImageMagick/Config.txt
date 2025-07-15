@@ -1,4 +1,4 @@
-[DLL]
+[DYNAMIC_LIBRARY]
 
 [LICENSE]
 LICENSE
@@ -7,19 +7,18 @@ LICENSE
 _WIN32
 BZ_EXPORT
 
-[DIRECTORIES]
-.
+[INCLUDE_ARTIFACTS]
+bzlib.h -> .
 
 [EXCLUDES]
-dlltest.c
-bzip2recover.c
 bzip2.c
-libbz2.def
+bzip2recover.c
+dlltest.c
 mk251.c
 spewG.c
 unzcrash.c
 
-[CONFIG_DEFINE]
+[MAGICK_BASECONFIG_DEFINE]
 /*
   Define to use the bzip2 compression library
 */
