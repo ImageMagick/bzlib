@@ -6,6 +6,24 @@ LICENSE
 [LICENSE_IDENTIFIER]
 bzip2-1.0.6
 
+[VERSION]
+1.0.8
+
+[RELEASE_DATE]
+2019-07-13
+
+[PRODUCT_NAME]
+libbzip2
+
+[COMPANY_NAME]
+Julian Seward, jseward@acm.org
+
+[URL]
+https://sourceware.org/bzip2/
+
+[COPYRIGHT]
+Copyright © 1996-2000 Julian R Seward
+
 [DEFINES]
 _WIN32
 BZ_EXPORT
