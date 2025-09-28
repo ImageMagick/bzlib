@@ -1,11 +1,5 @@
 [DYNAMIC_LIBRARY]
 
-[LICENSE_FILE]
-LICENSE
-
-[LICENSE_IDENTIFIER]
-bzip2-1.0.6
-
 [VERSION]
 1.0.8
 
@@ -23,6 +17,12 @@ https://sourceware.org/bzip2/
 
 [COPYRIGHT]
 Copyright © 1996-2000 Julian R Seward
+
+[LICENSE_FILE]
+LICENSE
+
+[LICENSE_IDENTIFIER]
+bzip2-1.0.6
 
 [DEFINES]
 _WIN32
